@@ -48,57 +48,9 @@ const BottomPanel = props => {
 
   const classes = useStyles()
 
-  const [topHeight, setTopHeight] = React.useState(400)
-  const separatorYPosition = React.useRef(null);
-
-  React.useEffect(() => {
-    document.addEventListener("mouseup", onMouseUp)
-    document.addEventListener("mousemove", onMouseMove)
-
-    return () => {
-      document.addEventListener("mouseup", onMouseUp)
-      document.removeEventListener("mousemove", onMouseMove)
-    }
-  })
-
-  const onMouseDown = (e) => {
-    console.log('onMouseDown', e.clientY)
-    separatorYPosition.current = e.clientY
-  }
-
-  const onMouseUp = () => {
-    separatorYPosition.current = null
-  }
-
-  const onMouseMove = (e) => {
-    // console.log('onMouseMove', e)
-    if (!separatorYPosition.current) {
-      return
-    }
-
-    if (topHeight < 20) {
-      separatorYPosition.current = null
-      setTopHeight(20)
-    }
-    else if (topHeight > 870) {
-      separatorYPosition.current = null
-      setTopHeight(870)
-    }
-    else {
-      const newTopHeight = topHeight - e.clientY + separatorYPosition.current
-      separatorYPosition.current = e.clientY
-
-      setTopHeight(newTopHeight)
-    }
-
-
-  }
-
-  console.log('topHeight', topHeight)
-
   return (
-    <div className={classes.root} style={{ height: `${topHeight}px` }}>
-      <div className={classes.spanBar} onMouseDown={onMouseDown}></div>
+    <div className={classes.root} style={{ height: 300 }}>
+      <div className={classes.spanBar}></div>
       <Paper style={{ height: 'calc(100% - 15px)' }}>
         foo
       </Paper>
